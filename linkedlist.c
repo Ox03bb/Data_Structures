@@ -25,16 +25,16 @@ void prepend(ndp *head,int dt){
     
 }
 
-void insrt(ndp head,int dt,int index){ 
-    ndp hp , scnr = head;       //helper pionter
+void insrt(ndp *head,int dt,int index){ 
+    ndp hp , scnr ;       //helper pionter
     
     if (index == 0){
-        prepend(&head , dt);
+        prepend(head , dt);
     
     }
 
     else if (index == -1){
-        append(&head,dt);
+        append(head,dt);
     }
     
       
@@ -42,7 +42,7 @@ void insrt(ndp head,int dt,int index){
         hp = malloc(sizeof(noude));
         (*hp).data = dt;
 
-        scnr = head; 
+        scnr = *head; 
 
         for (int pos = 0; pos < index - 1; pos ++){
             scnr = (*scnr).next; 
@@ -56,8 +56,10 @@ void insrt(ndp head,int dt,int index){
  
 
 void append(ndp *head,int dt){ 
-    ndp scnr = *head ,new_noude;       //helper pionter
     
+
+    ndp scnr = *head ,new_noude;       //helper pionter
+     
     new_noude = malloc(sizeof(noude));
     (*new_noude).data = dt;
     (*new_noude).next = NULL;
@@ -84,8 +86,9 @@ void main(int argc, char const *argv[]){
     prepend(&hd ,1);
     prepend(&hd ,2);
     prepend(&hd ,3);
-    insrt(hd,55,0);
-    prepend(&hd ,777);
+ 
+    insrt(&hd,55,0);
+
 
     display(hd);
     
