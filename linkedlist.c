@@ -18,26 +18,39 @@ typedef struct noude {
     ndp next;  
 } noude;
 
+void prepend(ndp *head,int dt){ 
+    ndp hp ;       //helper pionter 
 
+    hp = malloc(sizeof(noude));
+    (*hp).data = dt;     //its the same of hp->data
+    (*hp).next = *head;
 
-ndp insrt(ndp head,int dt){ 
-    ndp hp , scnr = head;       //helper pionter
+    *head = hp;
     
-    // if (index == 0){
-        hp = malloc(sizeof(noude));
-        (*hp).data = dt;     //its the same of hp->data
-        (*hp).next = head;
-        return hp;
-    // }
-
-    // else{ 
-    //     for (int cnt = 0; cnt <= index; cnt ++){
-    //       scnr = (*scnr).next; 
-    //     }
-    // }
-    // hp = malloc(sizeof(noude));
-
 }
+
+// ndp insrt(ndp head,int dt,int index){ 
+//     ndp hp , scnr = head;       //helper pionter
+    
+//     if (index == 0){
+//         return prepend(head , dt);
+    
+//     }
+//     else if (index == -1){
+//         return append(head,dt);
+//     }
+    
+
+//     // }
+
+//     // else{ 
+//     //     for (int cnt = 0; cnt <= index; cnt ++){
+//     //       scnr = (*scnr).next; 
+//     //     }
+//     // }
+//     // hp = malloc(sizeof(noude));
+    
+// }
 void append(ndp head,int dt){ 
     ndp scnr = head ,new_noude;       //helper pionter
     
@@ -56,7 +69,6 @@ void append(ndp head,int dt){
 
 void display(ndp head){
     ndp scaner = head;
-    printf("start\n");
     
     while (scaner != NULL){
         printf("%d\n",(*scaner).data);
@@ -67,10 +79,13 @@ void display(ndp head){
 
 void main(int argc, char const *argv[]){
     ndp hd = NULL; // hd mean head
-    hd = insrt(hd ,1);
-    hd = insrt(hd ,2);
-    hd = insrt(hd ,3);
-    insrt_tail(hd,5);
+    prepend(&hd ,1);
+    printf("%p\n",hd);
+    prepend(&hd ,2);
+    printf("%p\n",hd);    
+    prepend(&hd ,3);
+    printf("%p\n",hd);
+    // append(hd,5);
     display(hd);
     
     
