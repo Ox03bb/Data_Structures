@@ -14,6 +14,15 @@ typedef struct noude {
 
 void append(ndp *head,int dt);
 
+int lnt(ndp head){  //lenght
+    int lth=0;
+    while (head != NULL ){
+        head = (*head).next;
+        lth ++;
+    }
+    return lth;
+}
+
 void prepend(ndp *head,int dt){ 
     ndp hp ;       //helper pionter 
 
@@ -33,10 +42,28 @@ void insrt(ndp *head,int dt,int index){
     
     }
 
-    else if (index == -1){
-        append(head,dt);
+    // else if (index == -1){
+    //     append(head,dt);
+    // }
+    else if (index < 0){
+        int lt;
+        lt = lnt(*head);
+
+        hp = malloc(sizeof(noude));
+        (*hp).data = dt;
+
+        scnr = *head; 
+
+        for (int pos = 0; pos < (lt ) + index ; pos ++){
+            scnr = (*scnr).next; 
+        }
+
+        (*hp).next   = (*scnr).next ;
+        (*scnr).next = hp;
+
+
+
     }
-    
       
     else{ 
         hp = malloc(sizeof(noude));
@@ -84,11 +111,12 @@ void display(ndp head){
 void main(int argc, char const *argv[]){
     ndp hd = NULL; // hd mean head
     prepend(&hd ,1);
-    prepend(&hd ,2);
-    prepend(&hd ,3);
- 
-    insrt(&hd,55,0);
-
+    prepend(&hd ,1);
+    prepend(&hd ,1);
+    prepend(&hd ,1);
+    prepend(&hd ,1);
+    prepend(&hd ,1);
+    insrt(&hd,55,-1);
 
     display(hd);
     
