@@ -37,15 +37,26 @@ void prepend(ndp *head,int dt){
 void insrt(ndp *head,int dt,int index){ 
     ndp hp , scnr ;       //helper pionter
     
-    if (index == 0){
+    if (index > 0){ 
+        hp = malloc(sizeof(noude));
+        (*hp).data = dt;
+
+        scnr = *head; 
+
+        for (int pos = 0; pos < index - 1; pos ++){
+            scnr = (*scnr).next; 
+        }
+
+        (*hp).next   = (*scnr).next ;
+        (*scnr).next = hp;
+    }
+    
+    else if (index == 0){
         prepend(head , dt);
     
     }
 
-    // else if (index == -1){
-    //     append(head,dt);
-    // }
-    else if (index < 0){
+    else{
         int lt;
         lt = lnt(*head);
 
@@ -61,23 +72,7 @@ void insrt(ndp *head,int dt,int index){
         (*hp).next   = (*scnr).next ;
         (*scnr).next = hp;
 
-
-
-    }
-      
-    else{ 
-        hp = malloc(sizeof(noude));
-        (*hp).data = dt;
-
-        scnr = *head; 
-
-        for (int pos = 0; pos < index - 1; pos ++){
-            scnr = (*scnr).next; 
-        }
-
-        (*hp).next   = (*scnr).next ;
-        (*scnr).next = hp;
-    }
+    }    
     
 }
  
@@ -98,6 +93,33 @@ void append(ndp *head,int dt){
     (*scnr).next = new_noude;
 }
 
+void del(ndp *head,int indx){
+    ndp scnr = *head ,scnr2;
+    if (indx == 0){
+        scnr = *head;
+        *head = (*(*head)).next;
+        free(scnr);
+    }
+    
+   //! i have to fix this 
+    
+    else if (indx == -1){
+        while (scnr->next->next != NULL){
+            scnr = (*scnr).next;
+        }
+        scnr2 = (*scnr).next;
+        free (scnr2);
+        (*scnr).next= NULL;
+        // free(scnr);
+    }
+    
+    for (int pos = 0; pos < indx - 1; pos++){
+        scnr = scnr->next;  //the same of (*scnr).next
+    }
+    (*scnr).next = (*scnr).next;
+
+}
+
 void display(ndp head){
     ndp scaner = head;
     
@@ -111,12 +133,12 @@ void display(ndp head){
 void main(int argc, char const *argv[]){
     ndp hd = NULL; // hd mean head
     prepend(&hd ,1);
-    prepend(&hd ,1);
-    prepend(&hd ,1);
-    prepend(&hd ,1);
-    prepend(&hd ,1);
-    prepend(&hd ,1);
-    insrt(&hd,55,-1);
+    prepend(&hd ,2);
+    prepend(&hd ,3);
+    prepend(&hd ,4);
+    prepend(&hd ,5);
+    prepend(&hd ,6);
+    del(&hd,-1);
 
     display(hd);
     
