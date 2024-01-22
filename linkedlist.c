@@ -1,10 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-//singly linked list
+// Singly Linked List
 
 typedef struct noude noude;
-typedef noude *ndp;
+typedef noude *ndp; 
 
 typedef struct noude {
     int data;
@@ -22,7 +22,10 @@ int lnt(ndp head){  //lenght
     return lth;
 }
 
-// ======= Create =======
+
+// =========== Create ==============
+
+
 void prepend(ndp *head,int dt){ 
     ndp hp ;       //helper pionter 
 
@@ -99,7 +102,7 @@ void append(ndp *head,int dt){
     
 }
 
-// ======= Delete =======
+// =========== Delete =============
 
 void del(ndp *head,int indx){
     int lth =lnt(*head);
@@ -125,7 +128,7 @@ void del(ndp *head,int indx){
     }
 }
 
-// ======= Update =======
+// =========== Update =============
 
 void update(ndp *head,int dt,int indx ){
     int lth =lnt(*head);
@@ -143,7 +146,7 @@ void update(ndp *head,int dt,int indx ){
     }
 }
 
-// ======= Read =======
+// ============ Read ===============
 
 void display(ndp head){
     ndp scaner = head;
@@ -153,4 +156,3 @@ void display(ndp head){
         scaner = (*scaner).next;
     } 
 }
-
