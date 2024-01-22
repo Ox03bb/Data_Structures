@@ -37,7 +37,12 @@ void prepend(ndp *head,int dt){
 void insrt(ndp *head,int dt,int index){ 
     ndp hp , scnr ;       //helper pionter
     
-    if (index > 0){ 
+    
+    if (index == 0 || *head == NULL){
+        prepend(head , dt);
+    }
+
+    else if (index > 0){ 
         hp = malloc(sizeof(noude));
         (*hp).data = dt;
 
@@ -49,11 +54,6 @@ void insrt(ndp *head,int dt,int index){
 
         (*hp).next   = (*scnr).next ;
         (*scnr).next = hp;
-    }
-    
-    else if (index == 0){
-        prepend(head , dt);
-    
     }
 
     else{
@@ -79,45 +79,49 @@ void insrt(ndp *head,int dt,int index){
 
 void append(ndp *head,int dt){ 
     
+    if (*head == NULL){
+        printf("codestart");
+        prepend(head,dt);
+    }
+    else{
+        ndp scnr = *head ,new_noude;       //helper pionter
 
-    ndp scnr = *head ,new_noude;       //helper pionter
-     
-    new_noude = malloc(sizeof(noude));
-    (*new_noude).data = dt;
-    (*new_noude).next = NULL;
+        new_noude = malloc(sizeof(noude));
+        (*new_noude).data = dt;
+        (*new_noude).next = NULL;
 
     while ((*scnr).next != NULL){
         scnr = (*scnr).next;
     }
     
     (*scnr).next = new_noude;
+
+    }
+    
 }
 
 void del(ndp *head,int indx){
-    ndp scnr = *head ,scnr2;
-    if (indx == 0){
-        scnr = *head;
-        *head = (*(*head)).next;
-        free(scnr);
-    }
-    
-   //! i have to fix this 
-    
-    else if (indx == -1){
-        while (scnr->next->next != NULL){
-            scnr = (*scnr).next;
-        }
-        scnr2 = (*scnr).next;
-        free (scnr2);
-        (*scnr).next= NULL;
-        // free(scnr);
-    }
-    
-    for (int pos = 0; pos < indx - 1; pos++){
-        scnr = scnr->next;  //the same of (*scnr).next
-    }
-    (*scnr).next = (*scnr).next;
+    int lth =lnt(*head);
+    if (*head != NULL && (lth >= indx && lth >= -indx )){
 
+        ndp scnr = *head ,scnr2;
+
+        if (indx < 0 ){
+            indx = lth  + indx;
+        }
+        if (indx == 0){
+            scnr = *head;
+            *head = (*(*head)).next;
+            free(scnr);
+        }
+       
+        for (int pos = 0; pos < indx - 1; pos++){
+            scnr = scnr->next;  //the same of (*scnr).next
+        }
+        scnr2 = scnr->next;
+        (*scnr).next = scnr->next->next;
+        free(scnr2);
+    }
 }
 
 void display(ndp head){
@@ -131,14 +135,15 @@ void display(ndp head){
 }
 
 void main(int argc, char const *argv[]){
-    ndp hd = NULL; // hd mean head
-    prepend(&hd ,1);
-    prepend(&hd ,2);
-    prepend(&hd ,3);
-    prepend(&hd ,4);
-    prepend(&hd ,5);
-    prepend(&hd ,6);
-    del(&hd,-1);
+    ndp hd = NULL;  // hd mean head
+    
+    insrt(&hd,0,0);
+    append(&hd,1);
+    append(&hd,2);
+    append(&hd,3);
+    append(&hd,4);
+    del(&hd,5);
+
 
     display(hd);
     
