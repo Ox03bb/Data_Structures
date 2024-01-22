@@ -1,8 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
-
+//singly linked list
 
 typedef struct noude noude;
 typedef noude *ndp;
@@ -23,6 +22,7 @@ int lnt(ndp head){  //lenght
     return lth;
 }
 
+// ======= Create =======
 void prepend(ndp *head,int dt){ 
     ndp hp ;       //helper pionter 
 
@@ -76,7 +76,6 @@ void insrt(ndp *head,int dt,int index){
     
 }
  
-
 void append(ndp *head,int dt){ 
     
     if (*head == NULL){
@@ -99,6 +98,8 @@ void append(ndp *head,int dt){
     }
     
 }
+
+// ======= Delete =======
 
 void del(ndp *head,int indx){
     int lth =lnt(*head);
@@ -124,6 +125,8 @@ void del(ndp *head,int indx){
     }
 }
 
+// ======= Update =======
+
 void update(ndp *head,int dt,int indx ){
     int lth =lnt(*head);
     if (*head != NULL && (lth >= indx && lth >= -indx )){
@@ -140,27 +143,14 @@ void update(ndp *head,int dt,int indx ){
     }
 }
 
+// ======= Read =======
+
 void display(ndp head){
     ndp scaner = head;
     
     while (scaner != NULL){
         printf("%d\n",(*scaner).data);
         scaner = (*scaner).next;
-    }
-    
+    } 
 }
 
-void main(int argc, char const *argv[]){
-    ndp hd = NULL;  // hd mean head
-    
-    insrt(&hd,0,0);
-    append(&hd,1);
-    append(&hd,2);
-    append(&hd,3);
-    append(&hd,4);
-    update(&hd,100,0);
-
-
-    display(hd);
-    
-}
