@@ -124,6 +124,22 @@ void del(ndp *head,int indx){
     }
 }
 
+void update(ndp *head,int dt,int indx ){
+    int lth =lnt(*head);
+    if (*head != NULL && (lth >= indx && lth >= -indx )){
+        ndp scnr = *head;
+
+        if (indx < 0 ){
+            indx = lth  + indx;
+        }
+        
+        for (int pos = 0 ; pos <= indx -1;pos ++ ){
+            scnr = (*scnr).next;
+        }
+        scnr->data = dt;
+    }
+}
+
 void display(ndp head){
     ndp scaner = head;
     
@@ -142,7 +158,7 @@ void main(int argc, char const *argv[]){
     append(&hd,2);
     append(&hd,3);
     append(&hd,4);
-    del(&hd,5);
+    update(&hd,100,0);
 
 
     display(hd);
