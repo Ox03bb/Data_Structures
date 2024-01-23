@@ -1,9 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+// Queue
+
 typedef struct item item;
 typedef item *itp; 
-
 
 typedef struct item {
     int data;
@@ -31,27 +32,45 @@ int size(itp head){
     }    
 }
 
-void push(itp *head,int dt){
-    itp p;
+void enqueue(itp *head,int dt){
+    itp p,q;
+    
     p = malloc(sizeof(item));
-    p->data = dt;
-   
-    p->next = *head ;
+    if (p == NULL){
+        printf("Erorr: can't allocat addr");
+    }
 
-    *head = p;
+    p->data = dt;
+    p->next = NULL;
+
+    if ((*head) == NULL ){
+       
+        *head = p;
+    }
+    else{
+        q = *head;
+        while ((q->next) != NULL){
+            q = q->next;
+        }
+        q->next= p;
+    }
 }
 
-int pop(itp *head){
-    int val = (*head)->data;
-    itp p = *head;
-    *head = (*head)->next;
-    free(p);
+int dequeue(itp *head){
+    itp p ;
+    int val;
+    if (*head != NULL){
+        p = (*head)->next;
+    }
+    val = (*head)->data;
+    free(*head);
+    *head = p;
     return val;
 }
 
-int peek(itp *head){
-    if (*head != NULL){
-        return (*head)->data;
-    }
+int del(itp *head){
+    itp p = *head;
+    *head = (*head)->next;
+    free(p);
 }
 
