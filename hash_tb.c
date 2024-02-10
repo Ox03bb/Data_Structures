@@ -4,19 +4,14 @@
 
 // Hash Table
 
-typedef struct hash_tb{
-    int **tb ;
-    int **pts;
-    int size;
-}hash_tb;
+typedef ndp *hash_tb;
+int size;
 
 void create(int size){
     hash_tb ht;
-
-    ht.tb   = malloc(sizeof(hash_tb));
-    ht.pts  = malloc(sizeof(hash_tb));
-    ht.size = size; 
+    ht = malloc(sizeof(hash_tb)*size);
 }   
+
 
 void insrt(hash_tb ht,int dt){
     ndp nd , scnr;
@@ -27,13 +22,13 @@ void insrt(hash_tb ht,int dt){
     nd->data = dt;
     nd->next = NULL;
 
-    clc = dt % ht.size;
+    clc = dt % size;
 
-    if (ht.tb[clc] == NULL){
-        ht.tb[clc] = nd;
+    if (ht[clc] == NULL){
+        ht[clc] = nd;
     }
     else{
-        scnr = ht.tb[clc];
+        scnr = ht[clc];
         while (scnr->next != NULL){
             scnr = (*scnr).next;
         }
@@ -42,3 +37,6 @@ void insrt(hash_tb ht,int dt){
     
 }
 
+void main(){
+    
+}
